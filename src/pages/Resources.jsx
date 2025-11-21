@@ -233,14 +233,11 @@ const Resources = () => {
                                             </div>
                                             <div className="text-left">
                                                 <div className="font-bold text-slate-900 group-hover:text-brand-primary transition-colors">Complete Women's Health Guide</div>
-                                                <div className="text-xs text-slate-500">PDF • 2.4 MB</div>
+                                                <div className="text-xs text-slate-500">PDF • 653 KB</div>
                                             </div>
                                         </div>
                                         <FaDownload className="text-slate-400 group-hover:text-brand-primary" />
                                     </a>
-                                </div>
-                                <div className="mt-8 p-4 bg-blue-50 rounded-xl border border-blue-100 text-sm text-blue-800">
-                                    <strong>Note:</strong> The "Complete Guide" PDF is currently a placeholder. Please replace `public/complete-guide.pdf` with your actual file.
                                 </div>
                             </div>
                         </div>
