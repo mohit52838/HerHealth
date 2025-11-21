@@ -4,15 +4,12 @@ export async function createTrackerSheet(email) {
     if (!apiUrl) throw new Error("API URL is not configured. Please set VITE_SHEET_API_URL in your .env file.");
 
     try {
-        // We use "Content-Type": "text/plain" to avoid a CORS Preflight (OPTIONS) request.
-        // This is a "Simple Request". The body is still valid JSON.
         const res = await fetch(apiUrl, {
             method: "POST",
-            headers: {
-                "Content-Type": "text/plain;charset=utf-8",
-            },
+            headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email })
         });
+
 
         // Check for HTTP errors (like 401 Unauthorized or 403 Forbidden)
         if (!res.ok) {
