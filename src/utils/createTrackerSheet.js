@@ -1,7 +1,7 @@
 // src/utils/createTrackerSheet.js
 export async function createTrackerSheet(email) {
-    // Use the Netlify function proxy to avoid CORS
-    const apiUrl = "/.netlify/functions/createTracker";
+    const apiUrl = import.meta.env.VITE_SHEET_API_URL;
+    if (!apiUrl) throw new Error("API URL is not configured. Please set VITE_SHEET_API_URL in your .env file.");
 
     try {
         // We use "Content-Type": "text/plain" to avoid a CORS Preflight (OPTIONS) request.
