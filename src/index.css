@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Poppins", sans-serif;
+
+  --color-brand-primary: #e6007e;
+  --color-brand-secondary: #ffccdd;
+  --color-brand-bg: #fff5fa;
+  --color-brand-text: #374151;
+  --color-brand-heading: #111827;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-brand-bg);
+  color: var(--color-brand-text);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--color-brand-heading);
+}
+
+/* Typography Customization for Premium Medical Blog Look */
+.prose {
+  max-width: 65ch;
+  color: var(--color-brand-text);
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+  color: var(--color-brand-heading);
+  font-weight: 700;
+}
+
+.prose h2 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  padding-bottom: 0.5em;
+  border-bottom: 2px solid var(--color-brand-secondary);
+  color: var(--color-brand-primary);
+}
+
+.prose h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.75em;
+  color: #831843;
+  /* Darker pink for subheadings */
+}
+
+.prose p {
+  margin-bottom: 1.5em;
+  line-height: 1.8;
+  font-size: 1.125rem;
+  /* text-lg */
+}
+
+.prose ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.prose li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose li::before {
+  content: "•";
+  color: var(--color-brand-primary);
+  font-weight: bold;
+  position: absolute;
+  left: 0;
+  font-size: 1.2em;
+}
+
+.prose blockquote {
+  border-left-width: 4px;
+  border-left-color: var(--color-brand-primary);
+  background-color: #fff0f7;
+  padding: 1rem 1.5rem;
+  font-style: italic;
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: #831843;
+  font-weight: 500;
+}
+
+.prose strong {
+  color: var(--color-brand-heading);
+  font-weight: 600;
+}
+
+.prose a {
+  color: var(--color-brand-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+
+.prose a:hover {
+  border-bottom-color: var(--color-brand-primary);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #fff5fa;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #fbcfe8;
+  border-radius: 5px;
+  border: 2px solid #fff5fa;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e6007e;
+}
