@@ -30,9 +30,10 @@ export default async (req, context) => {
         const text = await res.text();
 
         // If Google returned HTML → error page
-        if (text.startsWith("<")) {
+        if (text.trim().startsWith("<")) {
+            const snippet = text.slice(0, 200).replace(/\n/g, " ");
             return new Response(
-                JSON.stringify({ status: "error", error: "Google Apps Script returned HTML, check deployment." }),
+                JSON.stringify({ status: "error", error: `Google Apps Script returned HTML (likely login page): ${snippet}` }),
                 { status: 500, headers: { "Content-Type": "application/json" } }
             );
         }

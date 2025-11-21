@@ -15,14 +15,18 @@ export async function createTrackerSheet(email) {
         });
 
         // Check for HTTP errors (like 401 Unauthorized or 403 Forbidden)
+        // Check for HTTP errors
         if (!res.ok) {
-            if (res.status === 401 || res.status === 403) {
-                throw new Error(`Permission Denied (${res.status}). The Google Script must be deployed with "Who has access: Anyone".`);
+            const errorText = await res.text();
+            let errorMsg = `Server returned HTTP ${res.status}`;
+            try {
+                const errorJson = JSON.parse(errorText);
+                if (errorJson.error) errorMsg = errorJson.error;
+            } catch (e) {
+                // If not JSON, use a snippet of the text
+                if (errorText) errorMsg += `: ${errorText.slice(0, 100)}`;
             }
-            if (res.status === 404) {
-                throw new Error("Script URL not found (404). Check your VITE_SHEET_API_URL.");
-            }
-            throw new Error(`Server returned HTTP ${res.status}`);
+            throw new Error(errorMsg);
         }
 
         const text = await res.text();
