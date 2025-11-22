@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import Chapters from './pages/Chapters';
 import ChapterPage from './pages/ChapterPage';
 import Resources from './pages/Resources';
+import FindDoctors from './pages/FindDoctors';
 import About from './pages/About';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/chapters" element={<Chapters />} />
           <Route path="/chapter/:id" element={<ChapterPage />} />
           <Route path="/resources" element={<Resources />} />
+          <Route path="/find-doctors" element={<FindDoctors />} />
           <Route path="/about" element={<About />} />
         </Routes>
       </main>

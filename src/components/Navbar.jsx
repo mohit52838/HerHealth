@@ -9,6 +9,7 @@ const Navbar = () => {
     const navLinks = [
         { name: 'Home', path: '/' },
         { name: 'Chapters', path: '/chapters' },
+        { name: 'Find Doctors', path: '/find-doctors' },
         { name: 'Resources', path: '/resources' },
         { name: 'About', path: '/about' },
     ];
@@ -32,8 +33,8 @@ const Navbar = () => {
                                 key={link.name}
                                 to={link.path}
                                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 relative ${isActive(link.path)
-                                        ? 'text-brand-primary font-bold'
-                                        : 'text-slate-600 hover:text-brand-primary hover:bg-pink-50'
+                                    ? 'text-brand-primary font-bold'
+                                    : 'text-slate-600 hover:text-brand-primary hover:bg-pink-50'
                                     }`}
                             >
                                 {link.name}
@@ -86,8 +87,8 @@ const Navbar = () => {
                                     to={link.path}
                                     onClick={() => setIsOpen(false)}
                                     className={`block px-4 py-3 rounded-xl text-base font-medium transition-colors ${isActive(link.path)
-                                            ? 'text-brand-primary bg-pink-50'
-                                            : 'text-slate-600 hover:text-brand-primary hover:bg-pink-50'
+                                        ? 'text-brand-primary bg-pink-50'
+                                        : 'text-slate-600 hover:text-brand-primary hover:bg-pink-50'
                                         }`}
                                 >
                                     {link.name}
