@@ -68,7 +68,7 @@ const Home = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
                         {[
-                            { icon: "📚", title: "Structured Learning", desc: "10 progressive chapters covering the entire spectrum of women's health." },
+                            { icon: "📚", title: "Structured Learning", desc: "19 progressive chapters covering the entire spectrum of women's health." },
                             { icon: "🔬", title: "Medically Verified", desc: "Content backed by authoritative sources like WHO, NHS, and CDC." },
                             { icon: "💝", title: "Holistic Approach", desc: "Focusing on physical, mental, and emotional well-being." }
                         ].map((feature, idx) => (
