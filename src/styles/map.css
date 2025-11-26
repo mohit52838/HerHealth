@@ -7,8 +7,8 @@
 }
 
 .cluster-inner {
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   background: linear-gradient(135deg, #ff77c6 0%, #e6007e 100%);
   color: white;

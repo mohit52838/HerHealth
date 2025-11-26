@@ -15,13 +15,14 @@ const FindDoctors = () => {
     const [showSearchButton, setShowSearchButton] = useState(false);
 
     // Filters
-    const [radius, setRadius] = useState(5000);
     const [filters, setFilters] = useState({
         Gynecologist: true,
         Hospital: true,
         Clinic: true,
         Doctor: true
     });
+
+    const DEFAULT_RADIUS = 5000;
 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -31,13 +32,13 @@ const FindDoctors = () => {
                     const userLoc = [latitude, longitude];
                     setLocation(userLoc);
                     setMapCenter(userLoc);
-                    fetchFacilities(latitude, longitude, radius);
+                    fetchFacilities(latitude, longitude, DEFAULT_RADIUS);
                 },
                 (err) => {
                     console.error("Geolocation error:", err);
                     setError("Location access denied. Showing default location.");
                     setLoading(false);
-                    fetchFacilities(18.5204, 73.8567, radius);
+                    fetchFacilities(18.5204, 73.8567, DEFAULT_RADIUS);
                 }
             );
         } else {
@@ -63,7 +64,7 @@ const FindDoctors = () => {
     const handleSearchArea = () => {
         if (mapBounds) {
             const center = mapBounds.getCenter();
-            fetchFacilities(center.lat, center.lng, radius, {
+            fetchFacilities(center.lat, center.lng, DEFAULT_RADIUS, {
                 south: mapBounds.getSouth(),
                 west: mapBounds.getWest(),
                 north: mapBounds.getNorth(),
@@ -125,23 +126,6 @@ const FindDoctors = () => {
                                     </button>
                                 ))}
                             </div>
-
-                            {/* Radius Selector */}
-                            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-hide mt-1">
-                                <span className="text-xs font-medium text-gray-400 whitespace-nowrap">Radius:</span>
-                                {[1, 3, 5, 10].map((r) => (
-                                    <button
-                                        key={r}
-                                        onClick={() => setRadius(r)}
-                                        className={`px-2.5 py-1 rounded-lg text-[10px] font-medium transition-all whitespace-nowrap border ${radius === r
-                                            ? 'bg-gray-800 text-white border-gray-800'
-                                            : 'bg-white text-gray-500 border-gray-200 hover:border-gray-300'
-                                            }`}
-                                    >
-                                        {r} km
-                                    </button>
-                                ))}
-                            </div>
                         </div>
                     </div>
 
@@ -156,7 +140,7 @@ const FindDoctors = () => {
                             <div className="text-center p-6 bg-red-50 rounded-xl border border-red-100 mx-2">
                                 <p className="text-red-600 text-sm font-medium mb-2">{error}</p>
                                 <button
-                                    onClick={() => fetchFacilities(mapCenter[0], mapCenter[1], radius)}
+                                    onClick={() => fetchFacilities(mapCenter[0], mapCenter[1], DEFAULT_RADIUS)}
                                     className="text-xs bg-red-100 text-red-700 px-3 py-1.5 rounded-lg hover:bg-red-200 transition-colors"
                                 >
                                     Try Again

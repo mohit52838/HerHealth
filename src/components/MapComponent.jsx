@@ -4,7 +4,7 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 import 'leaflet/dist/leaflet.css';
 import '../styles/map.css';
 import L from 'leaflet';
-import { FaSearchLocation, FaDirections, FaUserMd, FaHospital, FaClinicMedical } from 'react-icons/fa';
+import { FaSearchLocation, FaDirections, FaUserMd, FaHospital, FaClinicMedical, FaLocationArrow } from 'react-icons/fa';
 import MapLegend from './MapLegend';
 
 // Fix Leaflet default icon issue
@@ -18,12 +18,12 @@ L.Icon.Default.mergeOptions({
 // Custom Icons
 const createIcon = (url) => new L.Icon({
     iconUrl: url,
-    iconSize: [40, 40],
-    iconAnchor: [20, 40],
-    popupAnchor: [0, -45],
+    iconSize: [28, 28], // Reduced from 40x40
+    iconAnchor: [14, 28],
+    popupAnchor: [0, -30],
     shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
-    shadowSize: [40, 40],
-    shadowAnchor: [12, 40],
+    shadowSize: [28, 28],
+    shadowAnchor: [8, 28],
     className: 'leaflet-marker-icon-custom'
 });
 
@@ -40,8 +40,8 @@ const createClusterCustomIcon = (cluster) => {
     return L.divIcon({
         html: `<div class="cluster-inner">${cluster.getChildCount()}</div>`,
         className: 'marker-cluster-custom',
-        iconSize: L.point(40, 40, true),
-        iconAnchor: [20, 20]
+        iconSize: L.point(32, 32, true), // Reduced from 40x40
+        iconAnchor: [16, 16]
     });
 };
 
@@ -68,6 +68,34 @@ const MapUpdater = ({ center }) => {
         }
     }, [center, map]);
     return null;
+};
+
+// Recenter Button Component
+const RecenterButton = ({ userLocation }) => {
+    const map = useMap();
+
+    const handleRecenter = () => {
+        if (userLocation) {
+            map.flyTo(userLocation, 15, { duration: 1.5 });
+        }
+    };
+
+    if (!userLocation) return null;
+
+    return (
+        <div className="leaflet-bottom leaflet-right">
+            <div className="leaflet-control">
+                <button
+                    onClick={handleRecenter}
+                    className="bg-white text-gray-700 hover:text-[#e6007e] w-[34px] h-[34px] flex items-center justify-center shadow-md rounded-md transition-colors"
+                    title="Recenter Map"
+                    style={{ marginBottom: '80px', marginRight: '10px', pointerEvents: 'auto' }}
+                >
+                    <FaLocationArrow size={14} />
+                </button>
+            </div>
+        </div>
+    );
 };
 
 const MapComponent = ({ center, markers, onMarkerClick, userLocation, onBoundsChange, showSearchButton, onSearchArea }) => {
@@ -129,7 +157,7 @@ const MapComponent = ({ center, markers, onMarkerClick, userLocation, onBoundsCh
                 {userLocation && (
                     <Marker
                         position={userLocation}
-                        icon={L.divIcon({ className: 'user-location-marker', iconSize: [20, 20] })}
+                        icon={L.divIcon({ className: 'user-location-marker', iconSize: [32, 32] })} // Increased from 20x20
                     >
                         <Popup>
                             <div className="font-poppins">
@@ -151,6 +179,7 @@ const MapComponent = ({ center, markers, onMarkerClick, userLocation, onBoundsCh
                 </MarkerClusterGroup>
 
                 <MapLegend />
+                <RecenterButton userLocation={userLocation} />
             </MapContainer>
 
             {showSearchButton && (
